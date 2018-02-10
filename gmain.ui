@@ -161,7 +161,7 @@
             </font>
            </property>
            <property name="text">
-            <string>0</string>
+            <string>20</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -176,6 +176,9 @@
              <height>31</height>
             </rect>
            </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
            <property name="value">
             <number>0</number>
            </property>
@@ -188,9 +191,27 @@
             <rect>
              <x>540</x>
              <y>50</y>
-             <width>59</width>
+             <width>63</width>
              <height>29</height>
             </rect>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>15</number>
+           </property>
+           <property name="maximum">
+            <number>180</number>
+           </property>
+           <property name="singleStep">
+            <number>15</number>
+           </property>
+           <property name="value">
+            <number>15</number>
            </property>
           </widget>
           <widget class="QPushButton" name="add_new_time_1">
@@ -454,7 +475,7 @@
             </font>
            </property>
            <property name="text">
-            <string>0</string>
+            <string>20</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -469,6 +490,9 @@
              <height>31</height>
             </rect>
            </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
            <property name="value">
             <number>0</number>
            </property>
@@ -481,9 +505,27 @@
             <rect>
              <x>540</x>
              <y>50</y>
-             <width>59</width>
+             <width>63</width>
              <height>29</height>
             </rect>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>15</number>
+           </property>
+           <property name="maximum">
+            <number>180</number>
+           </property>
+           <property name="singleStep">
+            <number>15</number>
+           </property>
+           <property name="value">
+            <number>15</number>
            </property>
           </widget>
           <widget class="QPushButton" name="add_new_time_2">
@@ -726,7 +768,7 @@
             </font>
            </property>
            <property name="text">
-            <string>0</string>
+            <string>20</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -741,6 +783,9 @@
              <height>31</height>
             </rect>
            </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
            <property name="value">
             <number>0</number>
            </property>
@@ -753,9 +798,27 @@
             <rect>
              <x>540</x>
              <y>50</y>
-             <width>59</width>
+             <width>63</width>
              <height>29</height>
             </rect>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>15</number>
+           </property>
+           <property name="maximum">
+            <number>180</number>
+           </property>
+           <property name="singleStep">
+            <number>15</number>
+           </property>
+           <property name="value">
+            <number>15</number>
            </property>
           </widget>
           <widget class="QPushButton" name="add_new_time_3">
@@ -998,7 +1061,7 @@
             </font>
            </property>
            <property name="text">
-            <string>0</string>
+            <string>20</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1013,6 +1076,9 @@
              <height>31</height>
             </rect>
            </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
            <property name="value">
             <number>0</number>
            </property>
@@ -1025,9 +1091,27 @@
             <rect>
              <x>540</x>
              <y>50</y>
-             <width>59</width>
+             <width>63</width>
              <height>29</height>
             </rect>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="minimum">
+            <number>15</number>
+           </property>
+           <property name="maximum">
+            <number>180</number>
+           </property>
+           <property name="singleStep">
+            <number>15</number>
+           </property>
+           <property name="value">
+            <number>15</number>
            </property>
           </widget>
           <widget class="QPushButton" name="add_new_time_4">
