@@ -1,7 +1,7 @@
 import sys
 import time
 import os
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtWidgets, QtCore
 from gmain import Ui_MWindow as main_ui
 import sqlite3 as sql
 
@@ -9,12 +9,12 @@ import sqlite3 as sql
 class Main:
     def __init__(self):
         self.ui = main_ui()
-        self.window = QtGui.QMainWindow()
+        self.window = QtWidgets.QMainWindow()
         self.ui.setupUi(self.window)
         self.window.setFixedSize(self.window.size())
         self.window.closeEvent = self.closeEvent
 
-        self.conn = sql.connect('h.db')
+        self.conn = sql.connect('first-20-hours.sqlite')
         self.c = self.conn.cursor()
         self.c.execute("SELECT name FROM sqlite_master WHERE type='table'")
         if self.c.fetchall() == []:
@@ -48,23 +48,20 @@ class Main:
         self.ui.add_new_time_3.clicked.connect(self.task_add_time)
         self.ui.add_new_time_4.clicked.connect(self.task_add_time)
 
-
-
     def initialization(self):
         for i in range(4):
             if self.a_data[i][-1] == 1:
-                
+
                 exec('self.ui.task_frame_{}.setEnabled(True)'.format(i+1))
                 exec('self.ui.task_name_{}.setEnabled(True)'.format(i+1))
                 exec('self.ui.act_task_{}.setEnabled(False)'.format(i+1))
                 exec('self.ui.act_task_{}.setChecked(True)'.format(i+1))
-                
+
                 exec('self.ui.task_name_{}.setText("{}")'.format(i+1, self.a_data[i][0]))
-                
+
                 exec('self.ui.task_passed_h_{}.setText("{}")'.format(i+1, self.a_data[i][1]))
                 exec('self.ui.task_rem_h_{}.setText("{}")'.format(i+1, 20 - self.a_data[i][1]))
                 exec('self.ui.progressBar_{}.setValue({})'.format(i+1, (self.a_data[i][1] / 20)*100))
-
 
     def task_activator(self, s):
         sender = self.window.sender()
@@ -73,7 +70,6 @@ class Main:
         exec('self.ui.task_frame_{}.setEnabled(True)'.format(sender_n))
         exec('self.ui.task_name_{}.setEnabled(True)'.format(sender_n))
         self.a_data[sender_n-1][-1] = 1
-
 
     def task_name_edit(self, s):
         sender_n = int(self.window.sender().objectName()[-1])
@@ -84,13 +80,12 @@ class Main:
             t_name = eval('self.ui.task_name_{}.text()'.format(sender_n))
             self.a_data[sender_n-1][0] = t_name.rstrip()
 
-
     def task_delete(self):
-        tmp_message_box = QtGui.QMessageBox.question(self.window,
-                                    'Deleting Selected Task!',
-                                    'Selected Task will be deleted...    Are you Sure?',
-                                    QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
-        if tmp_message_box == QtGui.QMessageBox.No:
+        tmp_message_box = QtWidgets.QMessageBox.question(self.window,
+                                                         'Deleting Selected Task!',
+                                                         'Selected Task will be deleted...    Are you Sure?',
+                                                         QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+        if tmp_message_box == QtWidgets.QMessageBox.No:
             return
 
         sender_n = int(self.window.sender().objectName()[-1])
@@ -104,7 +99,6 @@ class Main:
         exec('self.ui.task_frame_{}.setEnabled(False)'.format(sender_n))
         self.a_data[sender_n-1] = [None, 0, 0]
 
-
     def task_add_time(self):
         sender_n = int(self.window.sender().objectName()[-1])
         minutes = int(eval('self.ui.new_time_{}.value()'.format(sender_n)))
@@ -112,10 +106,9 @@ class Main:
 
         # check for compelete task
         if temp_h + self.a_data[sender_n-1][1] >= 20:
-            tmp_message_box = QtGui.QMessageBox.warning(self.window,
-                                    'Task Completed!',
-                                    'Well Done :)   You achieved 20 hours in this Task...')
-
+            tmp_message_box = QtWidgets.QMessageBox.warning(self.window,
+                                                            'Task Completed!',
+                                                            'Well Done :)   You achieved 20 hours in this Task...')
 
         self.a_data[sender_n-1][1] += temp_h
 
@@ -124,11 +117,9 @@ class Main:
         exec('self.ui.task_rem_h_{}.setText("{}")'.format(sender_n, 20 - self.a_data[sender_n-1][1]))
         exec('self.ui.progressBar_{}.setValue({})'.format(sender_n, (self.a_data[sender_n-1][1] / 20)*100))
 
-
     def install_fonts(self):
         f = QtGui.QFontDatabase()
         f.addApplicationFont("GE_Inspira.ttf")
-
 
     def closeEvent(self, event):
         # print('\nclose',self.a_data)
@@ -137,21 +128,21 @@ class Main:
             if self.a_data[i][0] == None:
                 self.a_data[i][-1] = 0
 
-
         n = [x[0] for x in self.a_data]
         h = [x[1] for x in self.a_data]
         a = [x[2] for x in self.a_data]
-            
+
         for i in range(4):
-            self.c.execute('UPDATE hours SET task_name = ? , task_h = ? , task_active = ? WHERE _rowid_ = ?', [n[i], h[i], a[i], i+1])
+            self.c.execute('UPDATE hours SET task_name = ? , task_h = ? , task_active = ? WHERE _rowid_ = ?', [
+                           n[i], h[i], a[i], i+1])
 
         self.conn.commit()
         self.conn.close()
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    QtGui.QApplication.setStyle(QtGui.QStyleFactory.create('plastique'))
+    app = QtWidgets.QApplication(sys.argv)
+    QtWidgets.QApplication.setStyle(QtWidgets.QStyleFactory.create('plastique'))
     screen_resolution = app.desktop().screenGeometry()
     screen_size = screen_resolution.width(), screen_resolution.height()
 
